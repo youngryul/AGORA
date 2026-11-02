@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   AGORA Design Tokens
+   고전 서재 · 종이 · 조용한 밤 — Ivory / Cream / Warm Gray / Dark Brown / Deep Navy
+   --------------------------------------------------------------------------- */
+:root {
+  --paper: #faf6ee;        /* ivory: 메인 배경 */
+  --paper-2: #f3ecdf;      /* cream: 보조 면 */
+  --card: #fffdf8;
+  --ink: #2b2420;          /* dark brown: 본문 */
+  --ink-soft: #5d534b;
+  --muted: #8a7f74;        /* warm gray */
+  --line: #e4dacb;
+  --line-strong: #cfc2ae;
+  --accent: #1f2a44;       /* deep navy */
+  --accent-ink: #f8f3e8;
+  --gold: #a5824a;
+  --danger: #9b3b2f;
+  --bubble-user: #1f2a44;
+  --bubble-user-ink: #f6f1e6;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #14161d;        /* 조용한 밤 */
+  --paper-2: #1b1e27;
+  --card: #1e212b;
+  --ink: #ece4d5;
+  --ink-soft: #c7bdac;
+  --muted: #8f877b;
+  --line: #2c303b;
+  --line-strong: #3b404c;
+  --accent: #d9c7a0;       /* 촛불빛 */
+  --accent-ink: #1a1c24;
+  --gold: #c9a86a;
+  --danger: #e08a7a;
+  --bubble-user: #2b3247;
+  --bubble-user-ink: #efe8da;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-gold: var(--gold);
+  --color-danger: var(--danger);
+  --color-bubble-user: var(--bubble-user);
+  --color-bubble-user-ink: var(--bubble-user-ink);
+
+  --font-serif: 'Cormorant Garamond', 'Noto Serif KR', Georgia, serif;
+  --font-serif-kr: 'Noto Serif KR', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper font-sans text-ink;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    word-break: keep-all;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif-kr);
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--gold) 30%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* 종이 질감: 아주 옅은 그레인 */
+  .paper-texture {
+    background-image: radial-gradient(color-mix(in srgb, var(--ink) 3.5%, transparent) 0.6px, transparent 0.6px);
+    background-size: 3px 3px;
+  }
+  .rule {
+    @apply h-px w-full bg-line;
+  }
+  .eyebrow {
+    @apply text-[11px] tracking-[0.28em] text-muted uppercase;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s ease both;
+}
+
+@keyframes caret {
+  50% { opacity: 0; }
+}
+.streaming-caret::after {
+  content: '';
+  display: inline-block;
+  width: 0.5ch;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--gold);
+  animation: caret 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up, .streaming-caret::after { animation: none; }
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="ΣΩΚΡΑΤΗΣ">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#6b5a44"/>
+      <stop offset="1" stop-color="#2e261d"/>
+    </radialGradient>
+    <linearGradient id="bust" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6f0e2" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#f6f0e2" stop-opacity=".04"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <rect x="18" y="18" width="364" height="464" fill="none" stroke="#e9dcc0" stroke-opacity=".35" stroke-width="1.5"/>
+  <rect x="28" y="28" width="344" height="444" fill="none" stroke="#e9dcc0" stroke-opacity=".18" stroke-width="1"/>
+  <!-- abstract bust -->
+  <ellipse cx="200" cy="205" rx="62" ry="76" fill="url(#bust)" stroke="#f3ead6" stroke-opacity=".45" stroke-width="1.5"/>
+  <path d="M96 420c8-78 52-118 104-124 52 6 96 46 104 124" fill="url(#bust)" stroke="#f3ead6" stroke-opacity=".45" stroke-width="1.5"/>
+  
+  <text x="200" y="232" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="92" fill="#f6efdf" fill-opacity=".9">Σ</text>
+  <text x="200" y="455" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="17" letter-spacing="5" fill="#efe3c8" fill-opacity=".75">ΣΩΚΡΑΤΗΣ</text>
+</svg>

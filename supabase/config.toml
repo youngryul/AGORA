@@ -1,0 +1,63 @@
+# AGORA - Supabase local config (필요한 항목만 정의. 나머지는 CLI 기본값)
+project_id = "agora"
+
+# 다른 로컬 Supabase 프로젝트(기본 5432x)와 동시에 띄울 수 있도록 5433x 대역을 쓴다.
+[api]
+port = 54331
+schemas = ["public"]
+
+[db]
+port = 54332
+shadow_port = 54330
+major_version = 17
+
+[db.pooler]
+port = 54339
+
+[studio]
+port = 54333
+
+[inbucket]
+port = 54334
+
+[analytics]
+port = 54337
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[auth]
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173/auth/callback"]
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+
+[auth.external.google]
+enabled = false
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+skip_nonce_check = true
+
+# 모든 함수는 코드 내부에서 JWT 를 직접 검증한다 (supabase/functions/_shared/auth.ts).
+# - 신규 publishable/secret key 체계와 호환
+# - embed-document 는 사용자 JWT 가 아니라 service role key 로 호출
+[functions.chat]
+verify_jwt = false
+
+[functions.extract-memory]
+verify_jwt = false
+
+[functions.consolidate-memory]
+verify_jwt = false
+
+[functions.generate-reflection]
+verify_jwt = false
+
+[functions.embed-document]
+verify_jwt = false
+
+[functions.update-memory]
+verify_jwt = false

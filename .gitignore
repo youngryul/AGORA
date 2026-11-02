@@ -1,0 +1,10 @@
+node_modules
+dist
+*.local
+.env
+.env.local
+supabase/.branches
+supabase/.temp
+supabase/functions/.env
+.idea/workspace.xml
+.DS_Store
