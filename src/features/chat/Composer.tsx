@@ -38,7 +38,7 @@ export function Composer({ onSend, disabled, placeholder }: ComposerProps) {
         e.preventDefault();
         submit();
       }}
-      className="flex items-end gap-2 rounded-2xl border border-line bg-card p-2 pl-4 shadow-[0_10px_30px_-20px_rgba(43,36,32,0.4)] transition focus-within:border-gold/70"
+      className="speech flex items-end gap-2 p-2 pl-6 ring-2 ring-transparent ring-inset transition focus-within:ring-accent/50"
     >
       <textarea
         ref={ref}
@@ -54,19 +54,19 @@ export function Composer({ onSend, disabled, placeholder }: ComposerProps) {
         }}
         placeholder={placeholder ?? '생각을 천천히 적어 보세요…'}
         aria-label="메시지 입력"
-        className="max-h-[220px] min-h-[44px] flex-1 resize-none bg-transparent py-2.5 text-[15px] leading-relaxed text-ink placeholder:text-muted/80 focus:outline-none"
+        className="max-h-[220px] min-h-[48px] flex-1 resize-none bg-transparent py-3 text-[16px] leading-relaxed text-ink placeholder:text-muted focus:outline-none"
       />
       <button
         type="submit"
         disabled={disabled || !value.trim()}
         aria-label="보내기"
         className={cn(
-          'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-ink transition',
-          'disabled:cursor-not-allowed disabled:opacity-30',
+          'press flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-accent-ink shadow-[0_4px_0_var(--accent-edge)]',
+          'disabled:cursor-not-allowed disabled:opacity-35',
         )}
       >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M5 12h13M13 6l6 6-6 6" />
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+          <path d="M3.4 20.4 21 12 3.4 3.6l-.1 6.5L15 12 3.3 13.9Z" />
         </svg>
       </button>
     </form>

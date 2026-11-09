@@ -9,6 +9,7 @@ import { EmptyState } from '@/components/ui/States';
 import { Input } from '@/components/ui/Field';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { NextCaret } from '@/components/ui/Decor';
 
 export function TopicSelectPage() {
   const { code } = useParams();
@@ -34,19 +35,17 @@ export function TopicSelectPage() {
       <div className="animate-fade-up flex items-center gap-4">
         <Portrait src={character.portrait_url} name={character.name} shape="circle" className="h-14 w-14" />
         <div>
-          <p className="eyebrow">{character.name_en}</p>
-          <p className="font-display text-lg">{character.name}</p>
+          <span className="name-tag">{character.name}</span>
+          <p className="mt-1.5 ml-1 font-serif text-[13px] font-bold text-muted">{character.name_en}</p>
         </div>
       </div>
 
-      <h1
-        className="animate-fade-up mt-10 font-display text-3xl leading-snug sm:text-[34px]"
-        style={{ animationDelay: '120ms' }}
-      >
-        오늘 어떤 이야기를 하고 싶습니까?
-      </h1>
+      <div className="speech animate-fade-up relative mt-6 px-8 pt-7 pb-8" style={{ animationDelay: '120ms' }}>
+        <h1 className="font-display text-2xl leading-snug sm:text-[30px]">오늘은 어떤 이야기를 하고 싶나요?</h1>
+        <NextCaret className="absolute right-7 bottom-3" />
+      </div>
 
-      <ul className="mt-10 space-y-2.5">
+      <ul className="mt-8 space-y-3.5">
         {TOPIC_OPTIONS.map((t, i) => (
           <li key={t.id} className="animate-fade-up" style={{ animationDelay: `${200 + i * 60}ms` }}>
             <button
@@ -54,16 +53,18 @@ export function TopicSelectPage() {
               disabled={createSession.isPending}
               onClick={() => start(t.label)}
               className={cn(
-                'group flex w-full items-center justify-between rounded-2xl border border-line bg-card px-6 py-4 text-left transition',
-                'hover:border-accent/60 hover:bg-paper-2 disabled:opacity-60',
-                selected === t.label && 'border-accent',
+                'group press flex w-full items-center justify-between gap-4 rounded-full bg-card px-7 py-4 text-left shadow-[0_4px_0_var(--card-edge)] ring-2 ring-transparent ring-inset',
+                'hover:ring-accent/50 disabled:opacity-60',
+                selected === t.label && 'ring-accent',
               )}
             >
-              <span>
-                <span className="block text-[15.5px] text-ink">{t.label}</span>
-                <span className="mt-0.5 block text-xs text-muted">{t.hint}</span>
+              <span className="flex items-center gap-3">
+                <span aria-hidden className="text-gold transition group-hover:translate-x-0.5">▶</span>
+                <span>
+                <span className="block font-display text-[17px] text-ink">{t.label}</span>
+                <span className="mt-0.5 block text-[13px] text-muted">{t.hint}</span>
+                </span>
               </span>
-              <span className="text-muted transition group-hover:translate-x-0.5 group-hover:text-ink">→</span>
             </button>
           </li>
         ))}
@@ -93,7 +94,7 @@ export function TopicSelectPage() {
         <p className="mt-4 text-sm text-danger">대화를 시작하지 못했습니다: {createSession.error.message}</p>
       )}
 
-      <Link to={`/characters/${character.code}`} className="mt-10 text-sm text-muted hover:text-ink">
+      <Link to={`/characters/${character.code}`} className="chip chip-off mt-10 self-start">
         ← 돌아가기
       </Link>
     </div>

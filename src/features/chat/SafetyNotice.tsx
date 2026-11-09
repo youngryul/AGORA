@@ -3,9 +3,9 @@ export function SafetyNotice() {
   return (
     <aside
       role="alert"
-      className="animate-fade-up rounded-2xl border border-danger/30 bg-danger/[0.06] px-5 py-4 text-sm leading-relaxed text-ink"
+      className="animate-fade-up rounded-[28px] border-2 border-danger/40 bg-card px-6 py-5 text-[14.5px] leading-relaxed text-ink shadow-[0_4px_0_color-mix(in_srgb,var(--danger)_35%,var(--card-edge))]"
     >
-      <p className="font-medium">지금 많이 힘드시다면, 혼자 견디지 않으셔도 됩니다.</p>
+      <p className="font-display text-[17px] text-danger">지금 많이 힘드시다면, 혼자 견디지 않으셔도 됩니다.</p>
       <p className="mt-1.5 text-ink-soft">
         자살예방 상담전화 <a className="font-semibold text-ink underline" href="tel:109">109</a> (24시간) · 정신건강
         위기상담 <a className="font-semibold text-ink underline" href="tel:15770199">1577-0199</a> · 긴급 상황은{' '}

@@ -61,17 +61,17 @@ export function MemoryPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
       <header>
-        <p className="eyebrow">Memory</p>
-        <h1 className="mt-4 text-3xl font-medium">AGORA가 기억하고 있는 나</h1>
-        <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
+        <span className="name-tag">추억 상자</span>
+        <h1 className="mt-5 text-4xl">AGORA가 기억하고 있는 나</h1>
+        <p className="mt-4 text-[16px] leading-relaxed text-ink-soft">
           대화 속에서 중요해 보였던 것들입니다. 틀린 기억은 고치고, 원하지 않는 기억은 지울 수 있습니다.
         </p>
       </header>
 
       {/* Memory ON / OFF */}
-      <section className="mt-10 flex items-start justify-between gap-6 rounded-2xl border border-line bg-card px-6 py-5">
+      <section className="cozy-card mt-10 flex items-center justify-between gap-6 px-7 py-6">
         <div>
-          <p className="font-medium">기억 사용</p>
+          <p className="font-display text-[18px]">기억 사용</p>
           <p className="mt-1 text-sm leading-relaxed text-ink-soft">
             {enabled
               ? '대화에서 중요한 내용을 기억하고, 다음 대화에서 참고합니다.'
@@ -88,9 +88,9 @@ export function MemoryPage() {
 
       {/* AI Profile summary */}
       {ai && (ai.summary || ai.values.length > 0 || ai.goals.length > 0) && (
-        <section className="mt-6 rounded-2xl border border-line bg-paper-2/60 px-6 py-6">
+        <section className="mt-6 rounded-[28px] bg-leaf/20 px-7 py-6">
           <p className="eyebrow">요약</p>
-          {ai.summary && <p className="mt-3 font-display text-[16.5px] leading-relaxed">{ai.summary}</p>}
+          {ai.summary && <p className="mt-3 text-[16.5px] leading-relaxed">{ai.summary}</p>}
           <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-3">
             {[
               ['중요하게 여기는 것', ai.values],
@@ -99,7 +99,7 @@ export function MemoryPage() {
             ].map(([label, items]) =>
               (items as string[]).length ? (
                 <div key={label as string}>
-                  <dt className="text-xs text-muted">{label as string}</dt>
+                  <dt className="font-display text-[13px] text-accent">{label as string}</dt>
                   <dd className="mt-1.5 text-ink-soft">{(items as string[]).join(', ')}</dd>
                 </div>
               ) : null,
@@ -121,8 +121,8 @@ export function MemoryPage() {
               type="button"
               onClick={() => setScope(s.id)}
               className={cn(
-                'rounded-full border px-4 py-1.5 text-sm transition',
-                scope === s.id ? 'border-accent bg-accent text-accent-ink' : 'border-line text-ink-soft hover:border-line-strong',
+                'chip',
+                scope === s.id ? 'chip-on' : 'chip-off',
               )}
             >
               {s.name}
@@ -168,8 +168,8 @@ export function MemoryPage() {
       </div>
 
       {/* Delete all */}
-      <section className="mt-16 border-t border-line pt-8">
-        <p className="text-sm font-medium">모든 기억 지우기</p>
+      <section className="mt-16 rounded-[28px] border-2 border-dashed border-danger/40 px-7 py-6">
+        <p className="font-display text-[17px] text-danger">모든 기억 지우기</p>
         <p className="mt-1 text-sm text-ink-soft">
           저장된 기억, 인물과의 관계 기억, 요약을 모두 삭제합니다. 대화 기록은 남습니다.
         </p>

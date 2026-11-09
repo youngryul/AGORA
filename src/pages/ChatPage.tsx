@@ -55,7 +55,7 @@ export function ChatPage() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages.data?.length, pending?.assistantText, pending?.userMessage, session.data?.reflection]);
 
-  if (session.isLoading || messages.isLoading) return <PageLoader label="서재로 들어가는 중…" />;
+  if (session.isLoading || messages.isLoading) return <PageLoader label="광장으로 걸어가는 중…" />;
   if (session.error || !session.data) {
     return (
       <EmptyState
@@ -80,17 +80,17 @@ export function ChatPage() {
   return (
     <div className="flex h-dvh flex-col bg-paper">
       {/* Header */}
-      <header className="shrink-0 border-b border-line/70 bg-paper/90 backdrop-blur-md">
-        <div className="mx-auto flex h-[72px] max-w-3xl items-center gap-4 px-5">
-          <Link to="/characters" aria-label="나가기" className="-ml-2 rounded-full p-2 text-muted hover:bg-paper-2 hover:text-ink">
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <header className="shrink-0 px-3 pt-3">
+        <div className="mx-auto flex h-[72px] max-w-3xl items-center gap-4 rounded-full bg-card/95 px-4 shadow-[0_4px_0_var(--card-edge),0_14px_30px_-18px_rgb(var(--shadow)/0.45)] sm:px-5">
+          <Link to="/characters" aria-label="나가기" className="press flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-paper-2 text-ink-soft">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 6l-6 6 6 6" />
             </svg>
           </Link>
           {character && <Portrait src={character.portrait_url} name={name} shape="circle" className="h-11 w-11" />}
           <div className="min-w-0 flex-1">
-            <p className="font-display text-[17px] leading-tight">{name}</p>
-            <p className="truncate text-xs text-muted">{session.data.topic ?? '자유로운 대화'}</p>
+            <p className="font-display text-[19px] leading-tight">{name}</p>
+            <p className="truncate text-[13px] text-muted">{session.data.topic ?? '자유로운 대화'}</p>
           </div>
           {!ended && (
             <Button variant="secondary" size="sm" onClick={() => setConfirmEnd(true)} disabled={busy || endSession.isPending}>
@@ -101,9 +101,9 @@ export function ChatPage() {
       </header>
 
       {/* Conversation */}
-      <div className="paper-texture flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl space-y-9 px-5 py-10 sm:px-8">
-          <p className="text-center text-xs tracking-[0.2em] text-muted">{formatDate(session.data.started_at)}</p>
+      <div className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-3xl space-y-7 px-4 py-8 sm:px-8">
+          <p className="mx-auto w-fit rounded-full bg-card/70 px-4 py-1 text-center font-display text-[13px] text-muted">{formatDate(session.data.started_at)}</p>
 
           {showSafety && <SafetyNotice />}
 
@@ -118,22 +118,22 @@ export function ChatPage() {
           )}
 
           {status === 'error' && streamError && (
-            <div className="rounded-xl border border-danger/30 bg-danger/5 px-4 py-3 text-sm text-danger">
+            <div className="rounded-[22px] border-2 border-danger/40 bg-card px-5 py-3 text-sm text-danger">
               {streamError} 잠시 후 다시 시도해 주세요.
             </div>
           )}
 
           {ended && (
-            <section className="animate-fade-up mt-6 rounded-2xl border border-line bg-card px-8 py-10 text-center">
-              <p className="eyebrow">오늘의 대화</p>
+            <section className="cozy-card animate-fade-up relative mt-10 px-8 pt-12 pb-10 text-center">
+              <p className="name-tag absolute -top-4 left-1/2 -translate-x-1/2 rotate-0 text-[17px]">✿ 오늘의 대화 ✿</p>
               {session.data.reflection ? (
-                <p className="mx-auto mt-6 max-w-lg font-display text-xl leading-relaxed text-ink">
+                <p className="mx-auto mt-2 max-w-lg font-display text-[22px] leading-relaxed text-ink">
                   {session.data.reflection}
                 </p>
               ) : (
                 <p className="mt-6 text-ink-soft">대화가 끝났습니다.</p>
               )}
-              <p className="mt-4 text-sm text-muted">— {name}</p>
+              <p className="mt-4 font-display text-[15px] text-accent">— {name}</p>
               <div className="mt-10 flex flex-wrap justify-center gap-3">
                 {character && (
                   <Button variant="secondary" onClick={() => navigate(`/characters/${character.code}/topic`)}>
@@ -153,10 +153,10 @@ export function ChatPage() {
 
       {/* Composer */}
       {!ended && (
-        <div className="shrink-0 border-t border-line/60 bg-paper/95">
+        <div className="shrink-0">
           <div className="mx-auto max-w-3xl px-4 pt-3 pb-[max(env(safe-area-inset-bottom),12px)] sm:px-8">
             <Composer onSend={send} disabled={busy} placeholder={`${name}에게 이야기해 보세요…`} />
-            <p className="mt-2 text-center text-[11px] text-muted">
+            <p className="mt-3 text-center text-[12px] text-muted">
               역사적 인물의 사상을 바탕으로 재구성된 대화입니다. Enter 보내기 · Shift+Enter 줄바꿈
             </p>
           </div>

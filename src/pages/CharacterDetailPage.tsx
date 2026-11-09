@@ -4,6 +4,8 @@ import { Portrait } from '@/components/ui/Portrait';
 import { PageLoader } from '@/components/ui/Spinner';
 import { EmptyState } from '@/components/ui/States';
 import { formatLifetime } from '@/lib/utils';
+import { primaryButtonClass } from '@/components/ui/Button';
+import { NextCaret } from '@/components/ui/Decor';
 
 export function CharacterDetailPage() {
   const { code } = useParams();
@@ -25,7 +27,7 @@ export function CharacterDetailPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
-      <Link to="/characters" className="text-sm text-muted hover:text-ink">
+      <Link to="/characters" className="chip chip-off inline-block">
         ← 인물 목록
       </Link>
 
@@ -38,21 +40,25 @@ export function CharacterDetailPage() {
 
         <div className="animate-fade-up" style={{ animationDelay: '100ms' }}>
           <p className="eyebrow">{formatLifetime(character)}</p>
-          <h1 className="mt-3 text-4xl font-medium sm:text-5xl">{character.name}</h1>
-          <p className="mt-2 font-serif text-lg italic text-muted">{character.name_en}</p>
+          <h1 className="mt-2 text-5xl sm:text-6xl">{character.name}</h1>
+          <p className="mt-2 font-serif text-lg font-bold text-muted">{character.name_en}</p>
 
-          <blockquote className="mt-10 border-l-2 border-gold/60 pl-6 font-display text-xl leading-relaxed text-ink sm:text-2xl">
-            {character.short_philosophy}
-          </blockquote>
+          <div className="relative mt-10 pt-4">
+            <span className="name-tag absolute top-0 left-6 z-10">{character.name}</span>
+            <blockquote className="speech px-8 pt-8 pb-8 font-display text-xl leading-relaxed text-ink sm:text-2xl">
+              “{character.short_philosophy}”
+              <NextCaret className="absolute right-7 bottom-3" />
+            </blockquote>
+          </div>
 
-          <p className="mt-8 text-[15px] leading-[1.9] text-ink-soft">{character.description}</p>
+          <p className="mt-8 text-[16px] leading-[1.9] text-ink-soft">{character.description}</p>
 
           {character.topics.length > 0 && (
             <div className="mt-10">
               <p className="eyebrow mb-4">주요 대화 주제</p>
               <ul className="flex flex-wrap gap-2">
                 {character.topics.map((t) => (
-                  <li key={t} className="rounded-full border border-line px-4 py-1.5 text-sm text-ink-soft">
+                  <li key={t} className="chip chip-off">
                     {t}
                   </li>
                 ))}
@@ -63,7 +69,7 @@ export function CharacterDetailPage() {
           <div className="mt-12 flex flex-wrap items-center gap-4">
             <Link
               to={`/characters/${character.code}/topic`}
-              className="rounded-full bg-accent px-8 py-3.5 text-[15px] font-medium text-accent-ink shadow-sm transition hover:opacity-90"
+              className={`${primaryButtonClass} h-14 px-9 text-[18px]`}
             >
               대화 시작하기
             </Link>

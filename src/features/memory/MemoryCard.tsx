@@ -31,11 +31,17 @@ export function MemoryCard({ content, meta, importance, onSave, onDelete }: Memo
   };
 
   return (
-    <article className="group relative rounded-2xl border border-line bg-card px-6 py-5 transition hover:border-line-strong">
+    <article className="group cozy-card relative py-5 pr-6 pl-14">
       <span
         aria-hidden
-        className={cn('absolute top-6 left-0 h-6 w-[3px] rounded-r-full', importance >= 0.75 ? 'bg-gold' : 'bg-line-strong')}
-      />
+        title={importance >= 0.75 ? '소중한 기억' : undefined}
+        className={cn(
+          'absolute top-5 left-5 flex h-6 w-6 items-center justify-center rounded-full text-[13px]',
+          importance >= 0.75 ? 'bg-gold text-gold-ink shadow-[0_2px_0_var(--gold-edge)]' : 'bg-paper-2 text-muted',
+        )}
+      >
+        {importance >= 0.75 ? '★' : '•'}
+      </span>
       {editing ? (
         <div className="space-y-3">
           <Textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={3} maxLength={300} autoFocus />
@@ -61,7 +67,7 @@ export function MemoryCard({ content, meta, importance, onSave, onDelete }: Memo
           </div>
         </div>
       ) : (
-        <p className="font-display text-[16px] leading-relaxed text-ink">{content}</p>
+        <p className="text-[16px] leading-relaxed text-ink">{content}</p>
       )}
       <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs text-muted">{meta.filter(Boolean).join(' · ')}</p>

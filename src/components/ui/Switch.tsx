@@ -17,14 +17,14 @@ export function Switch({ checked, onCheckedChange, disabled, label }: SwitchProp
       disabled={disabled}
       onClick={() => onCheckedChange(!checked)}
       className={cn(
-        'relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border transition disabled:opacity-50',
-        checked ? 'border-accent bg-accent' : 'border-line-strong bg-paper-2',
+        'relative inline-flex h-8 w-14 shrink-0 items-center rounded-full transition disabled:opacity-50',
+        checked ? 'bg-accent shadow-[inset_0_-3px_0_var(--accent-edge)]' : 'bg-line-strong shadow-[inset_0_-3px_0_rgb(0_0_0/0.08)]',
       )}
     >
       <span
         className={cn(
-          'inline-block h-4.5 w-4.5 rounded-full shadow-sm transition-transform',
-          checked ? 'translate-x-[22px] bg-accent-ink' : 'translate-x-[3px] bg-card',
+          'inline-block h-6 w-6 rounded-full bg-card shadow-[0_2px_0_rgb(0_0_0/0.15)] transition-transform duration-200',
+          checked ? 'translate-x-[28px]' : 'translate-x-[4px]',
         )}
       />
     </button>

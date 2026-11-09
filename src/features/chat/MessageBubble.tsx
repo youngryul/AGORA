@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { NextCaret } from '@/components/ui/Decor';
 
 interface MessageBubbleProps {
   role: 'user' | 'assistant';
@@ -7,12 +8,12 @@ interface MessageBubbleProps {
   streaming?: boolean;
 }
 
-/** 인물의 말은 종이 위의 글처럼(serif, 말풍선 없음), 사용자의 말은 조용한 잉크색 카드로 */
+/** 인물의 말은 이름표가 달린 크림색 말풍선으로, 사용자의 말은 민트색 작은 말풍선으로 */
 export function MessageBubble({ role, content, characterName, streaming }: MessageBubbleProps) {
   if (role === 'user') {
     return (
       <div className="flex justify-end animate-fade-up">
-        <div className="max-w-[85%] rounded-2xl rounded-br-md bg-bubble-user px-5 py-3 text-[15px] leading-relaxed whitespace-pre-wrap text-bubble-user-ink sm:max-w-[75%]">
+        <div className="max-w-[85%] rounded-[28px] rounded-br-lg bg-bubble-user px-5 py-3 text-[15.5px] leading-relaxed whitespace-pre-wrap text-bubble-user-ink shadow-[0_3px_0_color-mix(in_srgb,var(--bubble-user)_70%,var(--accent-edge))] sm:max-w-[75%]">
           {content}
         </div>
       </div>
@@ -20,15 +21,13 @@ export function MessageBubble({ role, content, characterName, streaming }: Messa
   }
 
   return (
-    <div className="animate-fade-up">
-      <p className="eyebrow mb-2">{characterName}</p>
-      <div
-        className={cn(
-          'max-w-[95%] font-display text-[16.5px] leading-[1.95] whitespace-pre-wrap text-ink sm:max-w-[85%]',
-          streaming && 'streaming-caret',
-        )}
-      >
-        {content}
+    <div className="animate-fade-up relative pt-4">
+      <span className="name-tag absolute top-0 left-6 z-10">{characterName}</span>
+      <div className="speech max-w-[96%] px-7 pt-7 pb-6 sm:max-w-[88%]">
+        <div className={cn('text-[16.5px] leading-[1.9] whitespace-pre-wrap text-ink', streaming && 'streaming-caret')}>
+          {content}
+        </div>
+        {!streaming && <NextCaret className="absolute right-6 bottom-2.5" />}
       </div>
     </div>
   );
@@ -36,14 +35,17 @@ export function MessageBubble({ role, content, characterName, streaming }: Messa
 
 export function ThinkingIndicator({ characterName }: { characterName: string }) {
   return (
-    <div className="animate-fade-up">
-      <p className="eyebrow mb-2">{characterName}</p>
-      <div className="flex items-center gap-1.5 py-2 text-muted" aria-label={`${characterName}이(가) 생각하는 중`}>
+    <div className="animate-fade-up relative pt-4">
+      <span className="name-tag absolute top-0 left-6 z-10">{characterName}</span>
+      <div
+        className="speech inline-flex items-center gap-2 px-8 pt-7 pb-5"
+        aria-label={`${characterName}이(가) 생각하는 중`}
+      >
         {[0, 1, 2].map((i) => (
           <span
             key={i}
-            className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold/70"
-            style={{ animationDelay: `${i * 180}ms` }}
+            className="animate-hop h-2.5 w-2.5 rounded-full bg-gold"
+            style={{ animationDelay: `${i * 160}ms` }}
           />
         ))}
       </div>

@@ -9,7 +9,7 @@ interface DialogProps {
   className?: string;
 }
 
-/** 네이티브 <dialog> 기반 모달 (포커스 트랩/ESC 처리를 브라우저에 맡긴다) */
+/** 네이티브 <dialog> 기반 모달 — 말풍선 모양 (포커스 트랩/ESC 처리는 브라우저에 맡긴다) */
 export function Dialog({ open, onClose, title, children, className }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -28,12 +28,14 @@ export function Dialog({ open, onClose, title, children, className }: DialogProp
         if (e.target === ref.current) onClose();
       }}
       className={cn(
-        'm-auto w-[min(92vw,30rem)] rounded-2xl border border-line bg-card p-0 text-ink shadow-2xl backdrop:bg-black/40 backdrop:backdrop-blur-[2px]',
+        'speech m-auto w-[min(92vw,30rem)] overflow-visible border-0 p-0 text-ink backdrop:bg-[rgb(40_30_20/0.35)] backdrop:backdrop-blur-[3px]',
         className,
       )}
     >
-      <div className="p-7">
-        {title && <h2 className="mb-4 text-xl font-medium">{title}</h2>}
+      <div className="px-8 pt-9 pb-7">
+        {title && (
+          <h2 className="name-tag absolute -top-4 left-7 max-w-[85%] truncate text-[16px]">{title}</h2>
+        )}
         {children}
       </div>
     </dialog>

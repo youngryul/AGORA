@@ -20,8 +20,8 @@ export function HistoryPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
       <header className="mb-10">
-        <p className="eyebrow">Conversations</p>
-        <h1 className="mt-4 text-3xl font-medium">지나온 대화</h1>
+        <span className="name-tag">일기장</span>
+        <h1 className="mt-5 text-4xl">지나온 대화</h1>
       </header>
 
       {characters && (data?.length ?? 0) > 0 && (
@@ -32,8 +32,8 @@ export function HistoryPage() {
               type="button"
               onClick={() => setFilter(c.id)}
               className={cn(
-                'rounded-full border px-4 py-1.5 text-sm transition',
-                filter === c.id ? 'border-accent bg-accent text-accent-ink' : 'border-line text-ink-soft hover:border-line-strong',
+                'chip',
+                filter === c.id ? 'chip-on' : 'chip-off',
               )}
             >
               {c.name}
@@ -49,40 +49,40 @@ export function HistoryPage() {
           title="아직 나눈 대화가 없습니다."
           body="한 사람을 골라 오늘의 생각을 이야기해 보세요."
           action={
-            <Link to="/characters" className="rounded-full bg-accent px-6 py-3 text-sm text-accent-ink">
+            <Link to="/characters" className="press inline-flex rounded-full bg-accent px-7 py-3 font-display text-[16px] text-accent-ink shadow-[0_4px_0_var(--accent-edge)]">
               인물 만나기
             </Link>
           }
         />
       )}
 
-      <ol className="relative space-y-4 border-l border-line pl-6">
+      <ol className="relative space-y-5 border-l-4 border-dotted border-line-strong pl-7">
         {sessions.map((s) => (
           <li key={s.id} className="relative">
-            <span className="absolute top-7 -left-[29px] h-2 w-2 rounded-full bg-gold/70 ring-4 ring-paper" />
+            <span className="absolute top-7 -left-[42px] h-5 w-5 rounded-full bg-gold shadow-[0_2px_0_var(--gold-edge)] ring-4 ring-paper" />
             <Link
               to={`/chat/${s.id}`}
-              className="block rounded-2xl border border-line bg-card px-6 py-5 transition hover:border-line-strong"
+              className="cozy-card cozy-card-hover block px-6 py-5"
             >
               <div className="flex items-center gap-3">
                 <Portrait
                   src={s.characters?.portrait_url ?? null}
                   name={s.characters?.name ?? ''}
                   shape="circle"
-                  className="h-9 w-9"
+                  className="h-11 w-11"
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium">{s.characters?.name}</p>
-                  <p className="text-xs text-muted">
+                  <p className="font-display text-[17px]">{s.characters?.name}</p>
+                  <p className="text-[13px] text-muted">
                     {formatDate(s.started_at)} · {s.topic ?? '자유로운 대화'}
                   </p>
                 </div>
                 {!s.ended_at && (
-                  <span className="rounded-full border border-gold/50 px-2.5 py-0.5 text-[11px] text-gold">진행 중</span>
+                  <span className="rounded-full bg-leaf/40 px-3 py-1 font-display text-[12px] text-ink">이야기 중</span>
                 )}
               </div>
               {s.reflection && (
-                <p className="mt-4 border-l-2 border-gold/40 pl-4 font-display text-[15.5px] leading-relaxed text-ink">
+                <p className="mt-4 rounded-[22px] bg-paper-2/70 px-5 py-3 text-[15.5px] leading-relaxed text-ink">
                   {s.reflection}
                 </p>
               )}

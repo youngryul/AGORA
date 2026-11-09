@@ -47,16 +47,16 @@ export function LoginPage() {
   };
 
   return (
-    <div className="paper-texture flex min-h-[calc(100dvh-4rem)] items-center justify-center px-5 py-16">
+    <div className="flex min-h-[calc(100dvh-4rem)] items-center justify-center px-5 py-16">
       <div className="w-full max-w-sm">
         <div className="text-center">
           <Logo />
-          <p className="mt-4 font-display text-lg text-ink-soft">
-            {mode === 'signin' ? '다시 오신 것을 환영합니다.' : '서재의 문을 엽니다.'}
+          <p className="name-tag mt-5 !block mx-auto w-fit text-[16px]">
+            {mode === 'signin' ? '다시 와 줘서 반가워요!' : '섬에 오신 걸 환영해요!'}
           </p>
         </div>
 
-        <div className="mt-10 rounded-2xl border border-line bg-card p-7 shadow-[0_20px_50px_-30px_rgba(43,36,32,0.35)]">
+        <div className="speech mt-8 p-8">
           <Button
             type="button"
             variant="secondary"
@@ -72,7 +72,7 @@ export function LoginPage() {
             Google로 계속하기
           </Button>
 
-          <div className="my-6 flex items-center gap-3 text-xs text-muted">
+          <div className="my-6 flex items-center gap-3 font-display text-[13px] text-muted">
             <span className="rule flex-1" /> 또는 이메일 <span className="rule flex-1" />
           </div>
 
@@ -107,11 +107,11 @@ export function LoginPage() {
           </form>
         </div>
 
-        <p className="mt-6 text-center text-sm text-muted">
+        <p className="mt-7 text-center text-[15px] text-muted">
           {mode === 'signin' ? '처음이신가요?' : '이미 계정이 있으신가요?'}{' '}
           <button
             type="button"
-            className="text-ink underline-offset-4 hover:underline"
+            className="font-display text-accent underline-offset-4 hover:underline"
             onClick={() => {
               setMode(mode === 'signin' ? 'signup' : 'signin');
               setError(null);
